@@ -2,7 +2,7 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 // import {Link,  Switch, Route} from 'react-router-dom'
-import { Route, Link, Switch } from "react-router-dom";
+import { Route, Link, Switch, Redirect } from "react-router-dom";
 
 function HomePage() {
   return (
@@ -59,8 +59,20 @@ function UsersAdd() {
   return <div>You can search for users to add them</div>;
 }
 
-function MufasaUsers() {
-  return <div>All of the mufasas</div>;
+const userNames = ["tadej", "luis", "khrys", "ola", "filipe", "laura"];
+
+function MufasaUsers(props) {
+  console.log("props:", props);
+
+  const mufasaName = props.match.params.mufasa;
+
+  if (userNames.indexOf(mufasaName) < 0) {
+    // you shouldnt see this page at all
+    // return <div>HELLo, that name doesnt exist</div>;
+    return <Redirect to="/users/add" />;
+  }
+
+  return <div>All of the mufasas, but the current one is: {mufasaName}</div>;
 }
 
 function GoHomeYoureDrunk() {
