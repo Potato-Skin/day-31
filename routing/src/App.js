@@ -62,8 +62,6 @@ function UsersAdd() {
 const userNames = ["tadej", "luis", "khrys", "ola", "filipe", "laura"];
 
 function MufasaUsers(props) {
-  console.log("props:", props);
-
   const mufasaName = props.match.params.mufasa;
 
   if (userNames.indexOf(mufasaName) < 0) {
