@@ -2,10 +2,12 @@ import React from 'react';
 import countriesJson from '../countries.json';
 import { Link } from 'react-router-dom';
 
+function getCountry(code) {
+  return countriesJson.find((country) => country.cca3 === code);
+}
+
 function CountryDetails(props) {
-  const theCountry = countriesJson.find(
-    (country) => country.cca3 === props.match.params.countryId
-  );
+  const theCountry = getCountry(props.match.params.countryId);
 
   return (
     <div className="col-7">
@@ -31,10 +33,7 @@ function CountryDetails(props) {
                   return (
                     <li key={country}>
                       <Link to={`/${country}`}>
-                        {
-                          countriesJson.find((el) => el.cca3 === country)?.name
-                            .common
-                        }
+                        {getCountry(country)?.name.common}
                       </Link>
                     </li>
                   );
